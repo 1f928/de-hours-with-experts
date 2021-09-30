@@ -4,8 +4,11 @@ import sys
 def main():
     next_biggest_number(sys.argv[1])
 
+def int_to_digit_array(num): return [int(ch) for ch in str(num)]
+def digit_array_to_int(arr): return int("".join(str(n) for n in arr))
+    
 def next_biggest_number(num):
-    digits = [int(ch) for ch in str(num)]
+    digits = int_to_digit_array(num)
 
     # Reading right-to-left:
     for i in range(len(digits) - 2, -1, -1):
@@ -21,7 +24,7 @@ def next_biggest_number(num):
             high = [n for n in right_digits if n > low][0]
             right_digits.remove(high)
             
-            return(int("".join(str(n) for n in (left_digits + [high] + right_digits))))
+            return digit_array_to_int(left_digits + [high] + right_digits)
 
     # Fail case
     return -1
